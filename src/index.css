@@ -55,11 +55,11 @@ code {
 
 .button {
   border: 1px solid gray;
-  flex: 1;
+  width: 25%;
   font-size: 2em;
   text-align: center;
 }
 
 .wide {
-  flex: 2.1;
+  width: 50%;
 }
