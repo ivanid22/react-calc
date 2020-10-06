@@ -17,11 +17,9 @@ const ButtonPanel = () => {
 
   return (
     <div className="button-panel">
-      {Object.entries(groups).map(group => (
-        <div className="button-row" key={genKey()}>
-          {' '}
-          {renderGroup(group[1])}
-          {' '}
+      {Object.entries(groups).map(([groupName, group]) => (
+        <div className="button-row" key={groupName}>
+          {renderGroup(group)}
         </div>
       ))}
     </div>
