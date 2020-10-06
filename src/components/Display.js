@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 const Display = props => {
   const { result } = props;
   return (
-    <div className="display">
-      <input type="text" value={result} />
-    </div>
+    <input className="display" type="text" value={result} />
   );
 };
 

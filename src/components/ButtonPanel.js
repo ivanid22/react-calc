@@ -4,7 +4,7 @@ import Button from './Button';
 const genKey = () => Math.floor(Date.now() * Math.random());
 
 const renderGroup = group => (
-  group.map(item => <Button name={item} key={genKey()} />)
+  group.map(item => <Button name={item} key={genKey()} wide={item === '0'} />)
 );
 
 const ButtonPanel = () => {

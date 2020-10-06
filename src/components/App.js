@@ -3,7 +3,7 @@ import ButtonPanel from './ButtonPanel';
 import Display from './Display';
 
 const App = () => (
-  <div>
+  <div className="app">
     <Display />
     <ButtonPanel />
   </div>

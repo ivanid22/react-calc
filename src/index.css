@@ -25,3 +25,41 @@ code {
     'Courier New',
     monospace;
 }
+
+.display {
+  display: flex;
+  background-color: gray;
+  height: 100px;
+  color: white;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: right;
+  padding: 0 1em;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 700px;
+}
+
+.button-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-row {
+  display: flex;
+  height: 100px;
+}
+
+.button {
+  border: 1px solid gray;
+  flex: 1;
+  font-size: 2em;
+  text-align: center;
+}
+
+.wide {
+  flex: 2.1;
+}
