@@ -3,7 +3,7 @@ import { v4 as genKey } from 'uuid';
 import Button from './Button';
 
 const renderGroup = group => (
-  group.map(item => <Button name={item} key={genKey()} />)
+  group.map(item => <Button name={item} key={genKey()} wide={item === '0'} />)
 );
 
 const ButtonPanel = () => {
