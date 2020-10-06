@@ -11,12 +11,8 @@ const Button = props => {
   );
 };
 
-Button.defaultProps = {
-  name: 'N/A',
-};
-
 Button.propTypes = {
-  name: PropTypes.string,
+  name: PropTypes.string.isRequired,
 };
 
 export default Button;
