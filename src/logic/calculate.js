@@ -1,11 +1,11 @@
-import { operate } from './operate';
+import operate from './operate';
 
-const ButtonType = {
+export const ButtonType = {
   OPERATIONS: ['+', '-', '%', 'X', '÷'],
   NEGATIVIZE: '+/-',
   EQUALS: '=',
   ALL_CLEAR: 'AC',
-}
+};
 
 const calculate = (calculatorData, buttonName) => {
   const { total, next, operation } = calculatorData;
@@ -31,9 +31,26 @@ const calculate = (calculatorData, buttonName) => {
       };
     default:
       if (ButtonType.OPERATIONS.includes(buttonName)) {
-        return {
-          
+        if (next) {
+          return { // Next is present, return the result of the operation
+            total: operate(total, next, operation),
+            next: null,
+            operation: buttonName,
+          };
         }
+        return { // Next is empty, return the operation type only
+          total,
+          next,
+          operation: buttonName,
+        };
       }
   }
-}
+
+  return { // No case matches, return original params
+    total,
+    next,
+    operate,
+  };
+};
+
+export default calculate;
