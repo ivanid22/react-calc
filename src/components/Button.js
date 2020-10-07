@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 const Button = props => {
   const { name, color, wide } = props;
 
+  const handleClick = event => {
+    props.clickHandler(event.target.innerText);
+  }
+
   return (
     <button
       type="button"
+      onClick={handleClick}
       className={`button button-${name} ${wide ? 'wide' : ''}`}
       style={{ backgroundColor: color }}
     >
@@ -22,6 +27,7 @@ Button.defaultProps = {
 
 Button.propTypes = {
   name: PropTypes.string.isRequired,
+  clickHandler: PropTypes.func.isRequired,
   color: PropTypes.string,
   wide: PropTypes.bool,
 };
