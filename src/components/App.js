@@ -1,9 +1,7 @@
 import React from 'react';
 import ButtonPanel from './ButtonPanel';
 import Display from './Display';
-import calculate from '../logic/calculate';
-
-const DIGITS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+import calculate, { ButtonType } from '../logic/calculate';
 
 class App extends React.Component {
   constructor(props) {
@@ -43,7 +41,7 @@ class App extends React.Component {
       total, next, operation, justCalculated,
     } = this.state;
 
-    if (DIGITS.includes(buttonName)) {
+    if (ButtonType.DIGITS.includes(buttonName)) {
       if (justCalculated) {
         this.setState({ justCalculated: false, total: null, currentlyDisplayedValue: buttonName });
         this.updateTotal(buttonName);
@@ -54,7 +52,7 @@ class App extends React.Component {
       }
     } else if (buttonName === '=') {
       const result = calculate({ total, next, operation }, buttonName);
-      if (total && next) {
+      if (total) {
         this.setState({
           total: result.total,
           next: result.next,
@@ -72,7 +70,7 @@ class App extends React.Component {
         currentlyDisplayedValue: result.next ? result.next : result.total,
       });
     } else {
-      if (justCalculated && !buttonName === 'AC') return;
+      if (justCalculated && buttonName !== 'AC') return;
       const result = calculate({
         total,
         next,
@@ -84,15 +82,16 @@ class App extends React.Component {
         operation: result.operation,
         currentlyDisplayedValue: result.total,
       });
+      if (result.calculated) this.setState({ justCalculated: true });
       if (buttonName === 'AC') this.setState({ justCalculated: true, currentlyDisplayedValue: '0' });
     }
   }
 
   render() {
-    const { currentlyDisplayedValue } = this.state;
+    const { currentlyDisplayedValue, operation } = this.state;
     return (
       <div className="app">
-        <Display result={currentlyDisplayedValue} />
+        <Display result={currentlyDisplayedValue} operation={operation} />
         <ButtonPanel clickHandler={this.handleClick} />
       </div>
     );

@@ -20,9 +20,15 @@ const operate = (numberOne, numberTwo, operator) => {
     case OperationType.PRODUCT:
       return Big(first * second);
     case OperationType.DIVISION:
+      if (second === 0) {
+        return 'Error';
+      }
       return Big(first / second);
     case OperationType.PERCENTAGE:
-      return Big((numberTwo * 100) / numberOne);
+      if (!second || second === 'NaN') {
+        return Big(first / 100);
+      }
+      return Big(second / 100);
     default:
       throw new Error('Invalid or missing operator');
   }

@@ -1,7 +1,9 @@
 import operate from './operate';
 
 export const ButtonType = {
-  OPERATIONS: ['+', '-', '%', 'X', '÷'],
+  DIGITS: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'],
+  OPERATIONS: ['+', '-', 'X', '÷'],
+  PERCENT: '%',
   NEGATIVIZE: '+/-',
   EQUALS: '=',
   POINT: '.',
@@ -44,6 +46,24 @@ const calculate = (calculatorData, buttonName) => {
       if (total && next && operation) {
         return {
           total: operate(total, next, operation).toString(),
+          next: null,
+          operation: null,
+        };
+      }
+      break;
+    case ButtonType.PERCENT:
+      if (total && next) {
+        const result = operate(total, next, operation);
+        return {
+          total: (result / 100).toString(),
+          next: null,
+          operation: null,
+          calculated: true,
+        };
+      }
+      if (total && !next) {
+        return {
+          total: (Number(total) / 100).toString(),
           next: null,
           operation: null,
         };
