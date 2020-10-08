@@ -6,7 +6,7 @@ const Button = props => {
 
   const handleClick = event => {
     props.clickHandler(event.target.innerText);
-  }
+  };
 
   return (
     <button

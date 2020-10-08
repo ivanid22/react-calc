@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { v4 as genKey } from 'uuid';
 import Button from './Button';
 
-const ButtonPanel = (props) => {
+const ButtonPanel = props => {
   const groups = {
     group1: ['AC', '+/-', '%', '÷'],
     group2: ['7', '8', '9', 'X'],

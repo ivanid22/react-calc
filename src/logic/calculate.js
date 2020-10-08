@@ -4,6 +4,7 @@ export const ButtonType = {
   OPERATIONS: ['+', '-', '%', 'X', '÷'],
   NEGATIVIZE: '+/-',
   EQUALS: '=',
+  POINT: '.',
   ALL_CLEAR: 'AC',
 };
 
@@ -19,21 +20,40 @@ const calculate = (calculatorData, buttonName) => {
       };
     case ButtonType.ALL_CLEAR:
       return {
-        total: '',
-        next: '',
-        operation: '',
+        total: null,
+        next: null,
+        operation: null,
       };
+    case ButtonType.POINT:
+      if (next) {
+        return {
+          total,
+          next: next.indexOf('.') === -1 ? `${next}.` : next,
+          operation,
+        };
+      }
+      if (total) {
+        return {
+          total: total.indexOf('.') === -1 ? `${total}.` : total,
+          next,
+          operation,
+        };
+      }
+      return { total, next, operation };
     case ButtonType.EQUALS:
-      return {
-        total: operate(total, next, operation),
-        next: '',
-        operation: '',
-      };
+      if (total && next && operation) {
+        return {
+          total: operate(total, next, operation).toString(),
+          next: null,
+          operation: null,
+        };
+      }
+      break;
     default:
       if (ButtonType.OPERATIONS.includes(buttonName)) {
         if (next) {
           return { // Next is present, return the result of the operation
-            total: operate(total, next, operation),
+            total: operate(total, next, operation).toString(),
             next: null,
             operation: buttonName,
           };
@@ -49,7 +69,7 @@ const calculate = (calculatorData, buttonName) => {
   return { // No case matches, return original params
     total,
     next,
-    operate,
+    operation,
   };
 };
 
