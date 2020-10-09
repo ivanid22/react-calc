@@ -1,12 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { v4 as genKey } from 'uuid';
 import Button from './Button';
 
-const renderGroup = group => (
-  group.map(item => <Button name={item} key={genKey()} wide={item === '0'} />)
-);
-
-const ButtonPanel = () => {
+const ButtonPanel = ({ clickHandler }) => {
   const groups = {
     group1: ['AC', '+/-', '%', '÷'],
     group2: ['7', '8', '9', 'X'],
@@ -14,6 +11,14 @@ const ButtonPanel = () => {
     group4: ['1', '2', '3', '+'],
     group5: ['0', '.', '='],
   };
+
+  const handleClick = buttonName => {
+    clickHandler(buttonName);
+  };
+
+  const renderGroup = group => (
+    group.map(item => <Button name={item} key={genKey()} wide={item === '0'} clickHandler={handleClick} />)
+  );
 
   return (
     <div className="button-panel">
@@ -24,6 +29,10 @@ const ButtonPanel = () => {
       ))}
     </div>
   );
+};
+
+ButtonPanel.propTypes = {
+  clickHandler: PropTypes.func.isRequired,
 };
 
 export default ButtonPanel;

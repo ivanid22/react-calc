@@ -9,17 +9,26 @@ const OperationType = {
 };
 
 const operate = (numberOne, numberTwo, operator) => {
+  const first = Number(numberOne);
+  const second = Number(numberTwo);
+
   switch (operator) {
     case OperationType.ADDITION:
-      return Big(numberOne + numberTwo);
+      return Big(first + second);
     case OperationType.SUBTRACTION:
-      return Big(numberOne - numberTwo);
+      return Big(first - second);
     case OperationType.PRODUCT:
-      return Big(numberOne * numberTwo);
+      return Big(first * second);
     case OperationType.DIVISION:
-      return Big(numberOne / numberTwo);
+      if (second === 0) {
+        return 'Error';
+      }
+      return Big(first / second);
     case OperationType.PERCENTAGE:
-      return Big((numberTwo * 100) / numberOne);
+      if (!second || second === 'NaN') {
+        return Big(first / 100);
+      }
+      return Big(second / 100);
     default:
       throw new Error('Invalid or missing operator');
   }

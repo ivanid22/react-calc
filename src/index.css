@@ -26,8 +26,13 @@ code {
     monospace;
 }
 
+.display-container {
+  position: relative;
+}
+
 .display {
   display: flex;
+  width: 632px;
   background-color: gray;
   height: 100px;
   color: white;
@@ -35,6 +40,14 @@ code {
   font-size: 2em;
   text-align: right;
   padding: 0 1em;
+}
+
+.operator {
+  position: absolute;
+  top: 0;
+  right: 18px;
+  color: white;
+  font-size: 2em;
 }
 
 .app {
